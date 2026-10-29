@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>CoreCloud Procurement — Business Technology Bundles & Lifecycle Technology</title>
+  <meta name="description" content="CoreCloud Procurement provides curated business technology bundles, enterprise lifecycle technology and custom procurement for South African teams." />
+
+  <link rel="preload" href="assets/css/marketplace.css" as="style" />
+  <link rel="stylesheet" href="assets/css/marketplace.css" />
+  <link rel="preload" href="assets/images/corecloud-neon-logo.png" as="image" />
+  <link rel="icon" href="assets/images/corecloud-neon-logo.png" />
+  <link rel="prefetch" href="assets/data/bundles.by_promotion.json" as="fetch" crossorigin="anonymous" />
+  <script defer src="assets/js/auth.js"></script>
+
+  <link rel="canonical" href="https://www.corecloud-marketplace.com/" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#050b18" />
+
+  <meta property="og:site_name" content="CoreCloud Procurement" />
+  <meta property="og:title" content="CoreCloud Procurement — Business Technology Bundles" />
+  <meta property="og:description" content="Business technology bundles, enterprise lifecycle technology and custom procurement for South African teams." />
+  <meta property="og:url" content="https://www.corecloud-marketplace.com/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://www.corecloud-marketplace.com/assets/images/corecloud-neon-logo.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="CoreCloud Procurement — Business Technology Bundles" />
+  <meta name="twitter:description" content="Business technology bundles, enterprise lifecycle technology and custom procurement for South African teams." />
+  <meta name="twitter:image" content="https://www.corecloud-marketplace.com/assets/images/corecloud-neon-logo.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"CoreCloud Marketplace (Pty) Ltd",
+    "url":"https://access-mark.github.io/CoreCloud-Procurement-v2-Lead-Capture",
+    "logo":"https://www.corecloud-marketplace.com/assets/images/corecloud-neon-logo.png",
+    "sameAs":["https://www.linkedin.com/company/corecloudza/"]
+  }
+  </script>
+
+  <style>
+    html, body{ margin:0; padding:0; min-height:100%; }
+    body{
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:#050b18;
+      color:#e6eefc;
+      line-height:1.5;
+      position:relative;
+      overflow-x:hidden;
+    }
+    a{ color:inherit; text-decoration:none; }
+    .ccm-shell{ width:100%; max-width:1120px; margin:0 auto; padding:0 1.25rem; }
+    .ccm-main{ padding-top:135px; }
+
+    .ccm-header{
+      position:fixed; top:0; left:0; right:0; z-index:20;
+      backdrop-filter:blur(14px);
+      background:rgba(5,11,24,0.94);
+      border-bottom:1px solid rgba(255,255,255,0.06);
+      box-shadow:0 18px 40px rgba(0,0,0,0.55);
+    }
+    .ccm-header-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      height:120px; column-gap:1.5rem;
+    }
+    .ccm-brand{ display:flex; align-items:center; gap:.75rem; }
+    .ccm-logo{ height:96px; filter:drop-shadow(0 0 14px rgba(0,180,255,0.45)); }
+    .ccm-brand-text{ display:flex; flex-direction:column; }
+    .ccm-brand-title{ font-weight:600; font-size:1rem; }
+    .ccm-brand-tagline{ font-size:.8rem; color:rgba(230,238,252,0.75); }
+
+    .ccm-nav{ display:flex; align-items:center; gap:.75rem; }
+    .ccm-nav-link{
+      padding:.4rem .75rem; border-radius:999px; font-size:.9rem; opacity:.8;
+      transition:background .16s ease, opacity .16s ease, transform .08s ease, box-shadow .16s ease;
+    }
+    .ccm-nav-link:hover{ opacity:1; background:rgba(255,255,255,0.06); transform:translateY(-1px); }
+    .ccm-nav-link.is-active{ background:#f5b400; color:#050b18; opacity:1; box-shadow:0 0 0 1px rgba(245,180,0,.45), 0 14px 30px rgba(245,180,0,.22); }
+
+    .ccm-actions{ display:flex; align-items:center; gap:.75rem; }
+
+    .ccm-cart-link{
+      font-size:.85rem; padding:.35rem .9rem; border-radius:999px;
+      border:1px solid rgba(255,255,255,0.18);
+      background:rgba(5,11,24,0.8);
+      display:inline-flex; align-items:center; gap:.55rem;
+    }
+
+    /* Bigger, better basket icon + yellow */
+    .ccm-cart-ico{
+      width:26px; height:26px; display:inline-block;
+      color:#f5b400;
+      filter:drop-shadow(0 0 14px rgba(245,180,0,0.28));
+    }
+
+    .ccm-burger{
+      display:none; background:none; border:1px solid rgba(255,255,255,.4);
+      color:#e6eefc; padding:.35rem .7rem; border-radius:999px;
+      font-size:.8rem; cursor:pointer;
+    }
+    .ccm-burger span{ display:block; width:16px; height:1.6px; background:#e6eefc; margin:3px 0; }
+
+    /* TIGHTEN SPACE ABOVE HERO TITLE (tight) */
+    .ccm-hero{ padding:1.35rem 0 3.2rem; } /* was 2.6rem */
+    .badge{ font-size:.75rem; text-transform:uppercase; letter-spacing:.16em; color:#ffd970; margin:0 0 .45rem; } /* was margin-bottom:.75rem */
+    h1{ font-size:2.4rem; line-height:1.1; margin:0 0 .65rem; } /* was 0 0 1rem */
+    .subtitle{ font-size:1rem; max-width:36rem; color:rgba(230,238,252,0.88); margin:0; }
+    .hero-grid{ display:flex; gap:2rem; align-items:flex-start; }
+    .hero-copy{ flex:1.4; }
+    .hero-panel{ flex:1; }
+
+    .ccm-btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:.55rem 1.2rem; border-radius:999px;
+      border:1px solid transparent; font-size:.85rem; cursor:pointer;
+      transition:background .16s ease, border-color .16s ease, transform .08s ease, box-shadow .16s ease;
+      white-space:nowrap;
+    }
+    .ccm-btn.primary{ background:#f5b400; color:#050b18; border-color:#f5b400; box-shadow:0 12px 24px rgba(245,180,0,.22); }
+    .ccm-btn.primary:hover{ transform:translateY(-1px); box-shadow:0 18px 34px rgba(245,180,0,.26); }
+    .ccm-btn.ghost{ background:transparent; border-color:rgba(255,255,255,0.4); }
+    .ccm-btn.ghost:hover{ background:rgba(255,255,255,0.06); box-shadow:0 0 0 1px rgba(0,198,255,.22), 0 16px 34px rgba(0,198,255,.12); }
+
+    .ccm-section{ padding:2.5rem 0; }
+    /* remove excess space between title + description */
+    .section-head h2{ font-size:1.5rem; margin-top:0; margin-bottom:.4rem; }
+    .section-head p{ font-size:.95rem; max-width:42rem; color:rgba(230,238,252,0.9); margin-top:0; }
+
+    .filter-row{ display:flex; gap:.5rem; align-items:center; flex-wrap:wrap; }
+
+    .pill{
+      border:1px solid rgba(0,198,255,.55);
+      border-radius:999px;
+      padding:.52rem 1.05rem;
+      font-size:.84rem;
+      font-weight:600;
+      letter-spacing:.02em;
+      background:rgba(0,198,255,.10);
+      color:#eaf3ff;
+      cursor:pointer;
+      box-shadow:0 10px 24px rgba(0,0,0,.45), 0 0 0 1px rgba(0,0,0,.12) inset;
+      transition:transform .10s ease, background .16s ease, box-shadow .16s ease, border-color .16s ease, opacity .16s ease;
+      opacity:.95;
+    }
+    .pill:hover{
+      transform:translateY(-1px);
+      background:rgba(0,198,255,.16);
+      box-shadow:0 14px 34px rgba(0,0,0,.55), 0 0 18px rgba(0,198,255,.18);
+    }
+    .pill[aria-pressed="true"]{
+      background:linear-gradient(135deg, rgba(245,180,0,.95), rgba(255,210,63,.85));
+      color:#050b18;
+      border-color:rgba(255,210,63,.95);
+      box-shadow:0 16px 38px rgba(0,0,0,.55), 0 0 20px rgba(255,210,63,.35);
+    }
+    .pill .count{ opacity:.85; margin-left:.3rem; }
+
+    .search-input{
+      min-width:260px;
+      border-radius:999px;
+      border:1px solid rgba(0,198,255,.65);
+      padding:.48rem .85rem;
+      font-size:.85rem;
+      background:rgba(5,11,24,0.9);
+      color:#e6eefc;
+      outline:none;
+      box-shadow:0 0 0 1px rgba(0,198,255,.14), 0 14px 30px rgba(0,0,0,.45);
+    }
+    .search-input:focus{
+      box-shadow:0 0 0 1px rgba(0,198,255,.34), 0 0 24px rgba(0,198,255,.12), 0 18px 40px rgba(0,0,0,.55);
+    }
+
+    .product-grid{
+      display:grid;
+      gap:1.25rem;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      margin-top:1.5rem;
+    }
+    .product-card{
+      border-radius:18px;
+      padding:1rem 1rem 1.05rem;
+      background:rgba(9,18,40,0.88);
+      border:1px solid rgba(0,198,255,0.38);
+      box-shadow:
+        0 16px 38px rgba(0,0,0,0.55),
+        0 0 0 1px rgba(255,255,255,0.04) inset,
+        0 0 22px rgba(0,198,255,0.18);
+      backdrop-filter:blur(14px);
+      position:relative;
+      overflow:hidden;
+    }
+    .product-card:before{
+      content:"";
+      position:absolute; inset:-1px;
+      border-radius:18px;
+      pointer-events:none;
+      background:linear-gradient(135deg, rgba(0,198,255,0.22), rgba(245,180,0,0.14), rgba(0,198,255,0.08));
+      opacity:.9;
+      mix-blend-mode:screen;
+      filter:blur(.0px);
+    }
+    .product-card > *{ position:relative; z-index:1; }
+    .product-card:hover{
+      transform:translateY(-2px);
+      border-color:rgba(0,198,255,.28);
+      box-shadow:0 0 0 1px rgba(0,198,255,.16), 0 24px 54px rgba(0,0,0,.62);
+    }
+    .p-sub{ font-size:.85rem; color:rgba(230,238,252,0.8); margin:.25rem 0; }
+    .p-meta{ font-size:.8rem; color:rgba(230,238,252,0.7); margin-bottom:.5rem; }
+    .p-actions{ display:flex; gap:.5rem; margin-top:.35rem; flex-wrap:wrap; }
+    .ccm-btn.small{ padding:.35rem .8rem; font-size:.8rem; }
+    .empty{ font-size:.9rem; color:rgba(230,238,252,0.8); padding:1rem 0; }
+
+    .hero-card{
+      border-radius:18px; padding:1.25rem;
+      background:radial-gradient(circle at top left, rgba(21,52,105,0.96), rgba(5,11,24,0.94));
+      border:1px solid rgba(0,198,255,0.25);
+      box-shadow:
+        0 0 0 1px rgba(0,198,255,.14),
+        0 0 26px rgba(0,198,255,.22),
+        0 18px 40px rgba(0,0,0,0.6);
+      backdrop-filter:blur(16px);
+      position:relative;
+    }
+    .hero-card::after{
+      content:"";
+      position:absolute; inset:-2px;
+      border-radius:20px;
+      background:linear-gradient(135deg, rgba(0,198,255,.35), rgba(245,180,0,.25), rgba(0,198,255,.18));
+      filter:blur(12px);
+      opacity:.55;
+      z-index:-1;
+      pointer-events:none;
+    }
+    .hc-tag{ font-size:.75rem; text-transform:uppercase; letter-spacing:.16em; color:#ffd970; margin-bottom:.75rem; }
+    /* remove excess space between highlighted promotion title + sub */
+    #heroBundleTitle{ margin:0 0 .25rem; }
+    .hc-sub{ font-size:.9rem; color:rgba(230,238,252,0.86); margin:0; }
+    .hc-specs{ list-style:none; padding:0; margin:.6rem 0 0; font-size:.85rem; color:rgba(230,238,252,0.9); }
+
+    /* Featured promotion titles yellow */
+    .product-card h3{ color:#f5b400; }
+
+    .price-row{
+      display:flex; align-items:baseline; justify-content:space-between;
+      gap:.75rem; flex-wrap:wrap;
+      margin:.45rem 0 .55rem;
+      padding:.55rem .75rem;
+      border-radius:14px;
+      background:linear-gradient(180deg, rgba(6,14,34,.86), rgba(5,11,24,.62));
+      border:1px solid rgba(0,198,255,.18);
+      box-shadow:0 0 0 1px rgba(0,198,255,.10), 0 18px 40px rgba(0,0,0,.45);
+    }
+    .price-label{ font-size:.8rem; opacity:.82; letter-spacing:.02em; }
+
+    /* Bold yellow label for hero only */
+    #heroBundlePriceLabel{
+      color:#f5b400;
+      font-weight:800;
+      opacity:1;
+      text-shadow:0 0 14px rgba(245,180,0,0.22);
+    }
+
+    /* Bold yellow label for ALL featured bundles */
+    .price-label--yellow{
+      color:#f5b400;
+      font-weight:800;
+      opacity:1;
+      text-shadow:0 0 14px rgba(245,180,0,0.22);
+    }
+
+    .price{
+      display:inline-flex; align-items:baseline; gap:.3rem;
+      font-weight:700;
+      white-space:nowrap; /* keep "R" and value on same line */
+      text-shadow:0 0 18px rgba(0,198,255,.22);
+    }
+    .price .cur{ font-size:.85rem; opacity:.9; }
+    .price .amt{ font-size:1.05rem; }
+
+    .terms-note{
+      margin-top:.75rem;
+      font-size:.82rem;
+      color:rgba(230,238,252,0.78);
+      border-left:2px solid rgba(245,180,0,.55);
+      padding-left:.75rem;
+    }
+
+    .bundle-meta-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.45rem;margin:.75rem 0;}
+    .bundle-meta-item{border:1px solid rgba(0,198,255,.18);border-radius:12px;padding:.5rem;background:rgba(5,11,24,.45);}
+    .bundle-meta-item .k{font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:#ffd970;}
+    .bundle-meta-item .v{font-size:.82rem;color:rgba(230,238,252,.92);}
+    @media (max-width:640px){.bundle-meta-grid{grid-template-columns:1fr;}}
+
+    .ccm-footer{
+      border-top:1px solid rgba(255,255,255,0.08);
+      background:#050712;
+      padding:2rem 0 1.5rem;
+      margin-top:2.5rem;
+    }
+
+    #bgParticles{
+      position:fixed; inset:0; width:100vw; height:100vh;
+      z-index:0; pointer-events:none; filter:drop-shadow(0 0 18px rgba(0,198,255,.25));
+    }
+    body.has-particles .ccm-header,
+    body.has-particles .ccm-main,
+    body.has-particles .ccm-footer{ position:relative; z-index:1; background:transparent; }
+
+   /* =======================
+       TEAM BUNDLES BANNER (same as HOME)
+       ======================= */
+    .firesale-banner{
+      position:fixed;
+      top:120px; left:0; right:0;
+      z-index:19;
+      border-bottom:1px solid rgba(255,255,255,0.08);
+      background:linear-gradient(90deg, rgba(245,180,0,0.16), rgba(0,198,255,0.14), rgba(245,180,0,0.16));
+      backdrop-filter:blur(14px);
+      box-shadow:0 18px 40px rgba(0,0,0,0.55);
+      min-height:75px;
+    }
+    .firesale-inner{
+      width:100%; max-width:1120px; margin:0 auto; padding:1.3rem 1.25rem;
+      display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;
+    }
+    .fs-left{ display:flex; align-items:center; gap:.75rem; flex-wrap:wrap; }
+    .fs-badge{
+      display:inline-flex; align-items:center; gap:.45rem;
+      padding:.25rem .7rem;
+      border-radius:999px;
+      font-size:.72rem;
+      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      color:#050b18;
+      background:linear-gradient(135deg,#f5b400,#ffd970);
+      box-shadow:0 10px 22px rgba(245,180,0,0.28), 0 0 18px rgba(245,180,0,0.35);
+    }
+    .fs-text{ font-size:.85rem; color:rgba(230,238,252,0.92); }
+    .fs-text strong{ color:#ffd970; }
+    .fs-cta{ display:flex; gap:.5rem; align-items:center; }
+    .fs-mini{ font-size:.78rem; padding:.38rem .85rem; }
+
+    /* Highlight underglow */
+    .hero-card{
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-card::before{
+      content:"";
+      position:absolute;
+      inset:-40px;
+      background:radial-gradient(circle at 20% 20%, rgba(0,198,255,0.32), transparent 55%),
+                 radial-gradient(circle at 80% 25%, rgba(245,180,0,0.30), transparent 60%),
+                 radial-gradient(circle at 50% 100%, rgba(0,198,255,0.18), transparent 55%);
+      filter:blur(18px);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .hero-card > *{ position:relative; z-index:1; }
+
+    /* Pills pop */
+    .pill{
+      transition:transform .10s ease, border-color .16s ease, background .16s ease, box-shadow .16s ease, opacity .16s ease;
+      opacity:.92;
+    }
+    .pill:hover{
+      transform:translateY(-1px);
+      border-color:rgba(0,198,255,.75);
+      box-shadow:0 10px 22px rgba(0,0,0,0.35), 0 0 18px rgba(0,198,255,0.22);
+      opacity:1;
+    }
+    .pill[aria-pressed="true"]{
+      background:linear-gradient(135deg, rgba(0,198,255,0.22), rgba(245,180,0,0.18));
+      border-color:rgba(0,198,255,.75);
+      box-shadow:0 12px 26px rgba(0,0,0,0.45), 0 0 20px rgba(0,198,255,0.28);
+      transform:translateY(-1px);
+      opacity:1;
+    }
+
+    /* =======================
+       FLOATING BASKET
+       ======================= */
+    .float-basket{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      z-index:50;
+      display:none; /* shown via JS when cart has items */
+    }
+    .float-basket a{
+      display:flex;
+      align-items:center;
+      gap:.6rem;
+      border-radius:999px;
+      padding:.62rem .85rem;
+      background:rgba(9,18,40,0.92);
+      border:1px solid rgba(0,198,255,0.42);
+      box-shadow:0 18px 40px rgba(0,0,0,0.55), 0 0 22px rgba(0,198,255,0.14);
+      backdrop-filter:blur(14px);
+      transition:transform .10s ease, box-shadow .16s ease, border-color .16s ease, background .16s ease, opacity .16s ease;
+      opacity:.96;
+    }
+    .float-basket a:hover{
+      transform:translateY(-2px);
+      border-color:rgba(0,198,255,0.65);
+      box-shadow:0 22px 50px rgba(0,0,0,0.62), 0 0 26px rgba(0,198,255,0.18);
+      opacity:1;
+    }
+    .fb-icon{
+      width:42px; height:42px;
+      border-radius:999px;
+      display:grid; place-items:center;
+      background:linear-gradient(135deg, rgba(245,180,0,0.30), rgba(245,180,0,0.12));
+      border:1px solid rgba(255,255,255,0.10);
+      box-shadow:0 0 18px rgba(245,180,0,0.18);
+      color:#f5b400;
+    }
+    .fb-icon svg{ width:22px; height:22px; }
+    .fb-text{ display:flex; flex-direction:column; line-height:1.05; }
+    .fb-title{ font-size:.78rem; opacity:.92; }
+    .fb-sub{ font-size:.72rem; color:rgba(230,238,252,0.78); }
+    .fb-count{
+      margin-left:.35rem;
+      min-width:30px;
+      height:30px;
+      padding:0 .6rem;
+      border-radius:999px;
+      display:inline-flex; align-items:center; justify-content:center;
+      background:linear-gradient(135deg,#f5b400,#ffd970);
+      color:#050b18;
+      font-weight:900;
+      font-size:.8rem;
+      box-shadow:0 12px 24px rgba(245,180,0,.22);
+    }
+    @media (max-width:720px){
+      .firesale-banner{ top:0; position:sticky; }
+      .firesale-inner{ padding:.65rem 1.1rem; }
+      .fs-text{ font-size:.82rem; }
+      .float-basket{ right:14px; bottom:14px; }
+      .float-basket a{ padding:.58rem .78rem; }
+      .fb-text{ display:none; } /* compact on mobile */
+
+      .ccm-header-inner{ height:auto; padding:.75rem 0; }
+      .ccm-logo{ height:72px; }
+      .ccm-burger{ display:inline-flex; }
+      .ccm-nav{ display:none; flex-direction:column; align-items:flex-start; margin-top:.75rem; width:100%; }
+      .ccm-nav.open{
+        display:flex;
+        background:radial-gradient(circle at top, rgba(11,22,52,0.98), rgba(5,11,24,0.98));
+        padding:.75rem .9rem;
+        border-radius:18px;
+        border:1px solid rgba(255,255,255,0.08);
+        box-shadow:0 18px 40px rgba(0,0,0,0.8);
+      }
+      .ccm-main{ padding-top:135px; }
+    }
+
+    @media (max-width:880px){
+      .hero-grid{ flex-direction:column; }
+    }
+  </style>
+</head>
+
+<body class="has-particles">
+  <canvas id="bgParticles" aria-hidden="true"></canvas>
+
+  <header class="ccm-header">
+    <div class="ccm-shell ccm-header-inner">
+      <a href="index.html" class="ccm-brand">
+        <img src="assets/images/corecloud-neon-logo.png" alt="CoreCloud Procurement" class="ccm-logo" width="256" height="256" decoding="async" />
+        <div class="ccm-brand-text">
+          <span class="ccm-brand-title">CoreCloud Procurement</span>
+          <span class="ccm-brand-tagline">BUSINESS TECHNOLOGY BUNDLES</span>
+        </div>
+      </a>
+
+      <nav class="ccm-nav" aria-label="Main navigation">
+        <a href="index.html" class="ccm-nav-link is-active" aria-current="page">Home</a>
+        <a href="lifecycle.html" class="ccm-nav-link">Lifecycle</a>
+        <a href="employee-purchase.html" class="ccm-nav-link">Personal Laptops</a>
+        <a href="terms.html" class="ccm-nav-link">Terms</a>
+        <a href="warranty.html" class="ccm-nav-link">Warranty</a>
+      </nav>
+
+      <div class="ccm-actions">
+        <a href="cart.html" class="ccm-cart-link" aria-label="Basket">
+          <svg class="ccm-cart-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M7 10h10l-1.2 9H8.2L7 10Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+            <path d="M9 10V7.6A3 3 0 0 1 12 4.6a3 3 0 0 1 3 3V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M6.4 10H5.2c-.6 0-1 .4-1 1v0c0 .6.4 1 1 1H6.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M17.4 10h1.4c.6 0 1 .4 1 1v0c0 .6-.4 1-1 1H17.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+          (<span id="ccmCartCount">0</span>)
+        </a>
+
+        <button class="ccm-burger" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <aside class="ccm-shell" style="padding-top:20px"><div style="background:#102039;border:1px solid #34516c;border-radius:15px;padding:16px 22px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px"><span><strong>Buying a laptop for yourself?</strong> Single-device personal enquiries are now available.</span><a href="employee-purchase.html" style="background:#f5b400;color:#08111d;padding:10px 16px;border-radius:9px;font-weight:700">Personal laptop enquiries</a></div></aside>
+  <!-- FLOATING BASKET -->
+  <div class="float-basket" id="floatBasket" aria-live="polite">
+    <a href="cart.html" aria-label="Open basket">
+      <span class="fb-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7 10h10l-1.2 9H8.2L7 10Z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/>
+          <path d="M9 10V7.6A3 3 0 0 1 12 4.6a3 3 0 0 1 3 3V10" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+          <path d="M6.4 10H5.2c-.6 0-1 .4-1 1v0c0 .6.4 1 1 1H6.6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+          <path d="M17.4 10h1.4c.6 0 1 .4 1 1v0c0 .6-.4 1-1 1H17.2" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span class="fb-text">
+        <span class="fb-title">Quote cart</span>
+        <span class="fb-sub"><span id="fbCountText">0</span> bundles</span>
+      </span>
+      <span class="fb-count" id="fbCount">0</span>
+    </a>
+  </div>
+
+  <main class="ccm-main">
+    <section class="ccm-hero" id="top">
+      <div class="ccm-shell hero-grid">
+        <div class="hero-copy">
+          <p class="badge">CoreCloud Procurement · Enterprise lifecycle technology</p>
+          <h1>Technology procurement made simple.</h1>
+          <p class="subtitle">
+            Curated business technology packages for executive teams, sales teams, developers, finance departments and growing organisations. Source deployment-ready technology through a quote-first procurement model backed by professional lifecycle management.
+          </p>
+          <div style="display:flex;flex-wrap:wrap;gap:.75rem;margin:1.1rem 0 .75rem;">
+            <a href="#featured" class="ccm-btn primary">Browse bundles</a>
+            <a href="cart.html?custom=1" class="ccm-btn ghost">Request custom bundle</a>
+          </div>
+          <div class="terms-note">
+            <strong>Procurement model:</strong> Minimum-order business technology bundles. Final specification, lifecycle grade, availability, warranty and pricing are confirmed on formal quote.
+          </div>
+        </div>
+
+        <div class="hero-panel">
+          <div class="hero-card">
+            <p class="hc-tag">Highlighted Bundle</p>
+            <h2 id="heroBundleTitle">Sales Team Deployment Bundle</h2>
+            <p class="hc-sub" id="heroBundleSub">Sales Teams · Minimum 25 users · 100 included units</p>
+
+            <div class="price-row" aria-label="Highlighted bundle quote status">
+              <span class="price-label" id="heroBundlePriceLabel"><strong>Quote status</strong></span>
+              <span class="price" id="heroBundlePrice"><span class="cur"></span><span class="amt">Formal quote</span></span>
+            </div>
+
+            <ul class="hc-specs" id="heroBundleSpecs">
+              <li>25 × Business laptop | Lenovo ThinkPad T14 / T14s / Dell Latitude equivalent | 16GB RAM | 256GB/512GB SSD | Windows 11 Pro</li>
+              <li>25 × Laptop carry bag</li>
+              <li>25 × Business headset</li>
+              <li>+ 1 more…</li>
+            </ul>
+            <a id="heroBundleLink" href="bundle.html?bundle=Sales%20Team%20Deployment%20Bundle" class="ccm-btn ghost" style="margin-top:.9rem;display:inline-flex;">View bundle</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ccm-section" id="featured">
+      <div class="ccm-shell section-head">
+        <div>
+          <h2>Featured business technology bundles</h2>
+          <p>Choose the business outcome, then request a formal quote with confirmed specifications, lifecycle grade, warranty, pricing and lead time.</p>
+        </div>
+
+        <!-- removed promotion nav pills + search bar -->
+        <div class="filter-row" id="bundleFilters"></div>
+      </div>
+
+      <div class="ccm-shell product-grid" id="productGrid" aria-live="polite">
+          <article class="product-card">
+            <p class="p-meta">Executive Teams · Minimum 5 users</p>
+            <h3>Executive Mobility Bundle</h3>
+            <div class="price-row" aria-label="Bundle quote status">
+              <span class="price-label price-label--yellow"><strong>Quote status</strong></span>
+              <span class="price"><span class="cur"></span><span class="amt">Formal quote</span></span>
+            </div>
+            <p class="p-sub"><strong>Outcome:</strong> Premium mobile productivity for directors, executives and senior managers.</p>
+            <div class="bundle-meta-grid">
+              <div class="bundle-meta-item"><div class="k">Ideal For</div><div class="v">Executive leaders</div></div>
+              <div class="bundle-meta-item"><div class="k">Deployment Size</div><div class="v">5 users</div></div>
+              <div class="bundle-meta-item"><div class="k">Technology</div><div class="v">ThinkPad T14s / Latitude premium equivalent</div></div>
+              <div class="bundle-meta-item"><div class="k">Lifecycle Grade</div><div class="v">Enterprise Refurbished</div></div>
+            </div>
+            <p class="p-sub">Bundle lines: 5 · Included units: 25</p>
+            <ul class="hc-specs" style="margin-top:.5rem;"><li>5 × Premium business laptop | Lenovo ThinkPad T14s / Dell Latitude equivalent | 16GB RAM | 512GB SSD | Windows 11 Pro</li><li>5 × USB-C docking station</li><li>5 × 27 inch business monitor</li><li>+ 2 more…</li></ul>
+            <div class="p-actions">
+              <button class="ccm-btn small primary" data-add="Executive%20Mobility%20Bundle">Add</button>
+              <a class="ccm-btn small ghost" href="bundle.html?bundle=Executive%20Mobility%20Bundle">Details</a>
+            </div>
+            <p class="p-meta" style="margin-top:.6rem;">Lead time: Confirmed on quote</p>
+            <p class="p-meta" style="margin-top:.2rem;">Minimum order applies. Final specification and pricing confirmed on quote.</p>
+          </article>
+          <article class="product-card">
+            <p class="p-meta">Sales Teams · Minimum 25 users</p>
+            <h3>Sales Team Deployment Bundle</h3>
+            <div class="price-row" aria-label="Bundle quote status">
+              <span class="price-label price-label--yellow"><strong>Quote status</strong></span>
+              <span class="price"><span class="cur"></span><span class="amt">Formal quote</span></span>
+            </div>
+            <p class="p-sub"><strong>Outcome:</strong> Equip a full sales team with mobile, standardised, quote-ready devices.</p>
+            <div class="bundle-meta-grid">
+              <div class="bundle-meta-item"><div class="k">Ideal For</div><div class="v">Sales teams</div></div>
+              <div class="bundle-meta-item"><div class="k">Deployment Size</div><div class="v">25 users</div></div>
+              <div class="bundle-meta-item"><div class="k">Technology</div><div class="v">ThinkPad T14 / T14s / Latitude equivalent</div></div>
+              <div class="bundle-meta-item"><div class="k">Lifecycle Grade</div><div class="v">Enterprise Refurbished</div></div>
+            </div>
+            <p class="p-sub">Bundle lines: 4 · Included units: 100</p>
+            <ul class="hc-specs" style="margin-top:.5rem;"><li>25 × Business laptop | Lenovo ThinkPad T14 / T14s / Dell Latitude equivalent | 16GB RAM | 256GB/512GB SSD | Windows 11 Pro</li><li>25 × Laptop carry bag</li><li>25 × Business headset</li><li>+ 1 more…</li></ul>
+            <div class="p-actions">
+              <button class="ccm-btn small primary" data-add="Sales%20Team%20Deployment%20Bundle">Add</button>
+              <a class="ccm-btn small ghost" href="bundle.html?bundle=Sales%20Team%20Deployment%20Bundle">Details</a>
+            </div>
+            <p class="p-meta" style="margin-top:.6rem;">Lead time: Confirmed on quote</p>
+            <p class="p-meta" style="margin-top:.2rem;">Minimum order applies. Final specification and pricing confirmed on quote.</p>
+          </article>
+          <article class="product-card">
+            <p class="p-meta">Developer Teams · Minimum 5 users</p>
+            <h3>Developer Productivity Bundle</h3>
+            <div class="price-row" aria-label="Bundle quote status">
+              <span class="price-label price-label--yellow"><strong>Quote status</strong></span>
+              <span class="price"><span class="cur"></span><span class="amt">Formal quote</span></span>
+            </div>
+            <p class="p-sub"><strong>Outcome:</strong> High-productivity workstation setup for software, data and engineering teams.</p>
+            <div class="bundle-meta-grid">
+              <div class="bundle-meta-item"><div class="k">Ideal For</div><div class="v">Software and data teams</div></div>
+              <div class="bundle-meta-item"><div class="k">Deployment Size</div><div class="v">5 users</div></div>
+              <div class="bundle-meta-item"><div class="k">Technology</div><div class="v">High-RAM developer workstation platforms</div></div>
+              <div class="bundle-meta-item"><div class="k">Lifecycle Grade</div><div class="v">Enterprise Refurbished</div></div>
+            </div>
+            <p class="p-sub">Bundle lines: 4 · Included units: 25</p>
+            <ul class="hc-specs" style="margin-top:.5rem;"><li>5 × High-spec developer laptop | Core i7/Ryzen 7 class | 32GB RAM | 1TB SSD | Windows 11 Pro / Linux-ready</li><li>5 × USB-C docking station</li><li>10 × 24/27 inch business monitors for dual-screen setup</li><li>+ 1 more…</li></ul>
+            <div class="p-actions">
+              <button class="ccm-btn small primary" data-add="Developer%20Productivity%20Bundle">Add</button>
+              <a class="ccm-btn small ghost" href="bundle.html?bundle=Developer%20Productivity%20Bundle">Details</a>
+            </div>
+            <p class="p-meta" style="margin-top:.6rem;">Lead time: Confirmed on quote</p>
+            <p class="p-meta" style="margin-top:.2rem;">Minimum order applies. Final specification and pricing confirmed on quote.</p>
+          </article>
+          <article class="product-card">
+            <p class="p-meta">Hybrid Workforce · Minimum 10 users</p>
+            <h3>Hybrid Workforce Bundle</h3>
+            <div class="price-row" aria-label="Bundle quote status">
+              <span class="price-label price-label--yellow"><strong>Quote status</strong></span>
+              <span class="price"><span class="cur"></span><span class="amt">Formal quote</span></span>
+            </div>
+            <p class="p-sub"><strong>Outcome:</strong> Standardise hybrid work with laptop, dock, monitor and collaboration accessories.</p>
+            <div class="bundle-meta-grid">
+              <div class="bundle-meta-item"><div class="k">Ideal For</div><div class="v">Hybrid workforce teams</div></div>
+              <div class="bundle-meta-item"><div class="k">Deployment Size</div><div class="v">10 users</div></div>
+              <div class="bundle-meta-item"><div class="k">Technology</div><div class="v">Business laptops, docks and monitors</div></div>
+              <div class="bundle-meta-item"><div class="k">Lifecycle Grade</div><div class="v">Enterprise Refurbished</div></div>
+            </div>
+            <p class="p-sub">Bundle lines: 5 · Included units: 50</p>
+            <ul class="hc-specs" style="margin-top:.5rem;"><li>10 × Business laptop | 16GB RAM | 512GB SSD | Windows 11 Pro</li><li>10 × USB-C docking station</li><li>10 × 24/27 inch monitor</li><li>+ 2 more…</li></ul>
+            <div class="p-actions">
+              <button class="ccm-btn small primary" data-add="Hybrid%20Workforce%20Bundle">Add</button>
+              <a class="ccm-btn small ghost" href="bundle.html?bundle=Hybrid%20Workforce%20Bundle">Details</a>
+            </div>
+            <p class="p-meta" style="margin-top:.6rem;">Lead time: Confirmed on quote</p>
+            <p class="p-meta" style="margin-top:.2rem;">Minimum order applies. Final specification and pricing confirmed on quote.</p>
+          </article>
+          <article class="product-card">
+            <p class="p-meta">Finance Teams · Minimum 10 users</p>
+            <h3>Finance &amp; Operations Bundle</h3>
+            <div class="price-row" aria-label="Bundle quote status">
+              <span class="price-label price-label--yellow"><strong>Quote status</strong></span>
+              <span class="price"><span class="cur"></span><span class="amt">Formal quote</span></span>
+            </div>
+            <p class="p-sub"><strong>Outcome:</strong> Multi-screen productivity pack for back-office and finance users.</p>
+            <div class="bundle-meta-grid">
+              <div class="bundle-meta-item"><div class="k">Ideal For</div><div class="v">Finance and operations teams</div></div>
+              <div class="bundle-meta-item"><div class="k">Deployment Size</div><div class="v">10 users</div></div>
+              <div class="bundle-meta-item"><div class="k">Technology</div><div class="v">Dual-screen business productivity platforms</div></div>
+              <div class="bundle-meta-item"><div class="k">Lifecycle Grade</div><div class="v">Enterprise Refurbished</div></div>
+            </div>
+            <p class="p-sub">Bundle lines: 4 · Included units: 50</p>
+            <ul class="hc-specs" style="margin-top:.5rem;"><li>10 × Business laptop or compact desktop | 16GB RAM | 512GB SSD | Windows 11 Pro</li><li>20 × 24 inch business monitors for dual-screen setup</li><li>10 × Docking station or desktop connectivity kit</li><li>+ 1 more…</li></ul>
+            <div class="p-actions">
+              <button class="ccm-btn small primary" data-add="Finance%20%26%20Operations%20Bundle">Add</button>
+              <a class="ccm-btn small ghost" href="bundle.html?bundle=Finance%20%26%20Operations%20Bundle">Details</a>
+            </div>
+            <p class="p-meta" style="margin-top:.6rem;">Lead time: Confirmed on quote</p>
+            <p class="p-meta" style="margin-top:.2rem;">Minimum order applies. Final specification and pricing confirmed on quote.</p>
+          </article>
+          <article class="product-card">
+            <p class="p-meta">Contact Centres · Minimum 25 users</p>
+            <h3>Contact Centre Launch Bundle</h3>
+            <div class="price-row" aria-label="Bundle quote status">
+              <span class="price-label price-label--yellow"><strong>Quote status</strong></span>
+              <span class="price"><span class="cur"></span><span class="amt">Formal quote</span></span>
+            </div>
+            <p class="p-sub"><strong>Outcome:</strong> Quote-ready technology pack for launching or expanding a contact centre team.</p>
+            <div class="bundle-meta-grid">
+              <div class="bundle-meta-item"><div class="k">Ideal For</div><div class="v">Contact Centres</div></div>
+              <div class="bundle-meta-item"><div class="k">Deployment Size</div><div class="v">25 users</div></div>
+              <div class="bundle-meta-item"><div class="k">Technology</div><div class="v">Enterprise business platforms</div></div>
+              <div class="bundle-meta-item"><div class="k">Lifecycle Grade</div><div class="v">Enterprise Refurbished</div></div>
+            </div>
+            <p class="p-sub">Bundle lines: 4 · Included units: 100</p>
+            <ul class="hc-specs" style="margin-top:.5rem;"><li>25 × Compact desktop or business laptop | 8GB/16GB RAM | SSD | Windows 11 Pro</li><li>25 × Business monitor</li><li>25 × Noise-reducing headset</li><li>+ 1 more…</li></ul>
+            <div class="p-actions">
+              <button class="ccm-btn small primary" data-add="Contact%20Centre%20Launch%20Bundle">Add</button>
+              <a class="ccm-btn small ghost" href="bundle.html?bundle=Contact%20Centre%20Launch%20Bundle">Details</a>
+            </div>
+            <p class="p-meta" style="margin-top:.6rem;">Lead time: Confirmed on quote</p>
+            <p class="p-meta" style="margin-top:.2rem;">Minimum order applies. Final specification and pricing confirmed on quote.</p>
+          </article>
+          <article class="product-card">
+            <p class="p-meta">Startups &amp; SMEs · Minimum 5 users</p>
+            <h3>Startup Launch Bundle</h3>
+            <div class="price-row" aria-label="Bundle quote status">
+              <span class="price-label price-label--yellow"><strong>Quote status</strong></span>
+              <span class="price"><span class="cur"></span><span class="amt">Formal quote</span></span>
+            </div>
+            <p class="p-sub"><strong>Outcome:</strong> A complete starter technology pack for a small team.</p>
+            <div class="bundle-meta-grid">
+              <div class="bundle-meta-item"><div class="k">Ideal For</div><div class="v">Startups and new teams</div></div>
+              <div class="bundle-meta-item"><div class="k">Deployment Size</div><div class="v">5 users</div></div>
+              <div class="bundle-meta-item"><div class="k">Technology</div><div class="v">Business laptop starter platforms</div></div>
+              <div class="bundle-meta-item"><div class="k">Lifecycle Grade</div><div class="v">Enterprise Refurbished</div></div>
+            </div>
+            <p class="p-sub">Bundle lines: 4 · Included units: 20</p>
+            <ul class="hc-specs" style="margin-top:.5rem;"><li>5 × Business laptop | 16GB RAM | 512GB SSD | Windows 11 Pro</li><li>5 × 24 inch monitor</li><li>5 × Keyboard and mouse combo</li><li>+ 1 more…</li></ul>
+            <div class="p-actions">
+              <button class="ccm-btn small primary" data-add="Startup%20Launch%20Bundle">Add</button>
+              <a class="ccm-btn small ghost" href="bundle.html?bundle=Startup%20Launch%20Bundle">Details</a>
+            </div>
+            <p class="p-meta" style="margin-top:.6rem;">Lead time: Confirmed on quote</p>
+            <p class="p-meta" style="margin-top:.2rem;">Minimum order applies. Final specification and pricing confirmed on quote.</p>
+          </article>
+          <article class="product-card">
+            <p class="p-meta">Field Teams · Minimum 5 users</p>
+            <h3>Field Service Rugged Bundle</h3>
+            <div class="price-row" aria-label="Bundle quote status">
+              <span class="price-label price-label--yellow"><strong>Quote status</strong></span>
+              <span class="price"><span class="cur"></span><span class="amt">Formal quote</span></span>
+            </div>
+            <p class="p-sub"><strong>Outcome:</strong> Durable mobile devices for logistics, field service and operational teams.</p>
+            <div class="bundle-meta-grid">
+              <div class="bundle-meta-item"><div class="k">Ideal For</div><div class="v">Field service teams</div></div>
+              <div class="bundle-meta-item"><div class="k">Deployment Size</div><div class="v">5 users</div></div>
+              <div class="bundle-meta-item"><div class="k">Technology</div><div class="v">Rugged or semi-rugged mobile platforms</div></div>
+              <div class="bundle-meta-item"><div class="k">Lifecycle Grade</div><div class="v">Enterprise Refurbished</div></div>
+            </div>
+            <p class="p-sub">Bundle lines: 4 · Included units: 20</p>
+            <ul class="hc-specs" style="margin-top:.5rem;"><li>5 × Rugged or semi-rugged business laptop | Windows 11 Pro</li><li>5 × Vehicle/travel power option</li><li>5 × Protective carry case</li><li>+ 1 more…</li></ul>
+            <div class="p-actions">
+              <button class="ccm-btn small primary" data-add="Field%20Service%20Rugged%20Bundle">Add</button>
+              <a class="ccm-btn small ghost" href="bundle.html?bundle=Field%20Service%20Rugged%20Bundle">Details</a>
+            </div>
+            <p class="p-meta" style="margin-top:.6rem;">Lead time: Confirmed on quote</p>
+            <p class="p-meta" style="margin-top:.2rem;">Minimum order applies. Final specification and pricing confirmed on quote.</p>
+          </article>
+          <article class="product-card">
+            <p class="p-meta">Training &amp; Education · Minimum 20 users</p>
+            <h3>Training Lab Bundle</h3>
+            <div class="price-row" aria-label="Bundle quote status">
+              <span class="price-label price-label--yellow"><strong>Quote status</strong></span>
+              <span class="price"><span class="cur"></span><span class="amt">Formal quote</span></span>
+            </div>
+            <p class="p-sub"><strong>Outcome:</strong> Standardised devices for training rooms, labs and education deployments.</p>
+            <div class="bundle-meta-grid">
+              <div class="bundle-meta-item"><div class="k">Ideal For</div><div class="v">Training &amp; Education</div></div>
+              <div class="bundle-meta-item"><div class="k">Deployment Size</div><div class="v">20 users</div></div>
+              <div class="bundle-meta-item"><div class="k">Technology</div><div class="v">Enterprise business platforms</div></div>
+              <div class="bundle-meta-item"><div class="k">Lifecycle Grade</div><div class="v">Enterprise Refurbished</div></div>
+            </div>
+            <p class="p-sub">Bundle lines: 3 · Included units: 60</p>
+            <ul class="hc-specs" style="margin-top:.5rem;"><li>20 × Business laptop or compact desktop | SSD | Windows 11 Pro</li><li>20 × Business monitor where desktop configuration is selected</li><li>20 × Keyboard and mouse combo</li></ul>
+            <div class="p-actions">
+              <button class="ccm-btn small primary" data-add="Training%20Lab%20Bundle">Add</button>
+              <a class="ccm-btn small ghost" href="bundle.html?bundle=Training%20Lab%20Bundle">Details</a>
+            </div>
+            <p class="p-meta" style="margin-top:.6rem;">Lead time: Confirmed on quote</p>
+            <p class="p-meta" style="margin-top:.2rem;">Minimum order applies. Final specification and pricing confirmed on quote.</p>
+          </article>
+          <article class="product-card">
+            <p class="p-meta">MSP &amp; Reseller Lots · Minimum 5 users</p>
+            <h3>ThinkPad T14s Resale Bundle</h3>
+            <div class="price-row" aria-label="Bundle quote status">
+              <span class="price-label price-label--yellow"><strong>Quote status</strong></span>
+              <span class="price"><span class="cur"></span><span class="amt">Formal quote</span></span>
+            </div>
+            <p class="p-sub"><strong>Outcome:</strong> Small, clean resale lot for MSPs and brokers without bulk inventory risk.</p>
+            <div class="bundle-meta-grid">
+              <div class="bundle-meta-item"><div class="k">Ideal For</div><div class="v">MSP &amp; Reseller Lots</div></div>
+              <div class="bundle-meta-item"><div class="k">Deployment Size</div><div class="v">5 users</div></div>
+              <div class="bundle-meta-item"><div class="k">Technology</div><div class="v">Enterprise business platforms</div></div>
+              <div class="bundle-meta-item"><div class="k">Lifecycle Grade</div><div class="v">Enterprise Refurbished</div></div>
+            </div>
+            <p class="p-sub">Bundle lines: 1 · Included units: 5</p>
+            <ul class="hc-specs" style="margin-top:.5rem;"><li>5 × Lenovo ThinkPad T14s / T14 class refurbished business laptops | 16GB RAM | SSD | Windows 11 Pro</li></ul>
+            <div class="p-actions">
+              <button class="ccm-btn small primary" data-add="ThinkPad%20T14s%20Resale%20Bundle">Add</button>
+              <a class="ccm-btn small ghost" href="bundle.html?bundle=ThinkPad%20T14s%20Resale%20Bundle">Details</a>
+            </div>
+            <p class="p-meta" style="margin-top:.6rem;">Lead time: Confirmed on quote</p>
+            <p class="p-meta" style="margin-top:.2rem;">Minimum order applies. Final specification and pricing confirmed on quote.</p>
+          </article>
+      </div>
+    </section>
+
+    <section class="ccm-section" id="why-procurement">
+      <div class="ccm-shell section-head">
+        <h2>Enterprise technology without enterprise pricing</h2>
+        <p>CoreCloud Procurement combines team-based technology bundles with enterprise lifecycle sourcing, helping organisations reduce acquisition cost while maintaining business-grade capability.</p>
+      </div>
+      <div class="ccm-shell product-grid">
+        <article class="product-card"><h3>Enterprise Grade</h3><p class="p-sub">Business-class Lenovo, Dell and HP technology platforms selected for professional use.</p></article>
+        <article class="product-card"><h3>Lifecycle Managed</h3><p class="p-sub">Sourced through professional lifecycle management programmes with testing, grading and quality assurance.</p></article>
+        <article class="product-card"><h3>Cost Efficient</h3><p class="p-sub">Reduce technology acquisition costs without forcing teams onto consumer-grade equipment.</p></article>
+        <article class="product-card"><h3>Sustainable Procurement</h3><p class="p-sub">Support circular economy initiatives by extending the useful life of enterprise technology and reducing unnecessary e-waste.</p></article>
+      </div>
+    </section>
+
+    <section class="ccm-section" id="lifecycle">
+      <div class="ccm-shell hero-card">
+        <p class="hc-tag">Lifecycle Management</p>
+        <h2 style="margin-top:0;color:#ffd970;">Powered by professional lifecycle sourcing</h2>
+        <p class="hc-sub">CoreCloud sources enterprise-grade technology through professional lifecycle management programmes delivered with ReWorks Africa. This supports secure data sanitisation, refurbishment, grading, redeployment and circular economy outcomes.</p>
+        <ul class="hc-specs">
+          <li>• Secure data sanitisation and asset handling</li>
+          <li>• Professional refurbishment and quality assurance</li>
+          <li>• Enterprise lifecycle technology, not consumer second-hand equipment</li>
+          <li>• Lower acquisition cost with sustainability benefits</li>
+        </ul>
+        <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1rem;">
+          <a href="lifecycle.html" class="ccm-btn primary">Learn about lifecycle management</a>
+          <a href="https://reworksafrica.co.za" class="ccm-btn ghost" target="_blank" rel="noopener">Visit ReWorks Africa</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="ccm-section" id="custom-procurement">
+      <div class="ccm-shell section-head">
+        <h2>Need something different?</h2>
+        <p>Not every organisation fits a standard package. Tell us the team type, quantity, preferred platform and budget range, and CoreCloud will build a custom procurement bundle aligned to your users and deployment requirements.</p>
+        <a href="cart.html?custom=1" class="ccm-btn primary">Request a custom bundle</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="ccm-footer">
+    <div class="ccm-shell" style="font-size:.85rem;opacity:.85;display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between;">
+      <div>© <span id="year"></span> CoreCloud Marketplace (Pty) Ltd.</div>
+      <div style="display:flex;gap:.9rem;flex-wrap:wrap;">
+        <a href="index.html" style="text-decoration:underline;text-underline-offset:3px;">Home</a>
+        <a href="lifecycle.html" style="text-decoration:underline;text-underline-offset:3px;">Lifecycle</a>
+        <a href="terms.html" style="text-decoration:underline;text-underline-offset:3px;">Terms</a>
+        <a href="warranty.html" style="text-decoration:underline;text-underline-offset:3px;">Warranty</a>
+        <a href="cart.html" style="text-decoration:underline;text-underline-offset:3px;display:inline-flex;align-items:center;gap:.35rem;">
+          <svg class="ccm-cart-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M7 10h10l-1.2 9H8.2L7 10Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+            <path d="M9 10V7.6A3 3 0 0 1 12 4.6a3 3 0 0 1 3 3V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M6.4 10H5.2c-.6 0-1 .4-1 1v0c0 .6.4 1 1 1H6.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M17.4 10h1.4c.6 0 1 .4 1 1v0c0 .6-.4 1-1 1H17.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+          Cart
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile nav toggle
+    (function(){
+      const toggle = document.getElementById('menuToggle');
+      const nav = document.querySelector('.ccm-nav');
+      if(!toggle || !nav) return;
+      toggle.addEventListener('click', () => {
+        const open = nav.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', String(open));
+      });
+    })();
+
+    // Cart helpers
+    function getCart(){
+      try{ return JSON.parse(localStorage.getItem('ccm-cart') || '[]'); }
+      catch(e){ return []; }
+    }
+    function setCart(c){ localStorage.setItem('ccm-cart', JSON.stringify(c)); }
+
+    function syncCartBadges(){
+      const c = getCart();
+      const count = c.length;
+
+      // Header count
+      const headSpan = document.getElementById('ccmCartCount');
+      if(headSpan) headSpan.textContent = String(count);
+
+      // Floating basket
+      const fb = document.getElementById('floatBasket');
+      const fbCount = document.getElementById('fbCount');
+      const fbCountText = document.getElementById('fbCountText');
+
+      if(fbCount) fbCount.textContent = String(count);
+      if(fbCountText) fbCountText.textContent = String(count);
+
+      // show/hide
+      if(fb){
+        fb.style.display = count > 0 ? 'block' : 'none';
+      }
+    }
+    syncCartBadges();
+
+    // Pricing helpers
+    function formatZAR(n){
+      const v = Number(n);
+      if(!isFinite(v)) return '—';
+      return v.toLocaleString('en-ZA', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    // Bundles
+    let ALL_BUNDLES = [];
+    let ACTIVE_PROMO = 'all';
+    let SEARCH_Q = '';
+
+    function normalize(s){ return String(s || '').trim().toLowerCase(); }
+    function safe(s){ return String(s || '').trim(); }
+
+    function bundleHay(b){
+      const items = Array.isArray(b.items) ? b.items : [];
+      const itemText = items.map(i => `${i.name||''} ${i.sku||''} ${i.category||''}`).join(' ');
+      return normalize([b.bundle, `promotion ${b.promotion_id||''}`, itemText].filter(Boolean).join(' '));
+    }
+
+    function filterNow(){
+      const q = normalize(SEARCH_Q);
+      return ALL_BUNDLES.filter(b=>{
+        const promoOk = (ACTIVE_PROMO === 'all') || (String(b.promotion_id) === String(ACTIVE_PROMO));
+        if(!promoOk) return false;
+        if(!q) return true;
+        return bundleHay(b).includes(q);
+      });
+    }
+
+    function buildFilters(){
+      const row = document.getElementById('bundleFilters');
+      if(!row) return;
+      // removed promotion nav pills + search bar (keep container for layout)
+      row.innerHTML = '';
+    }
+
+    function renderHero(){
+      const t = document.getElementById('heroBundleTitle');
+      const s = document.getElementById('heroBundleSub');
+      const u = document.getElementById('heroBundleSpecs');
+      const l = document.getElementById('heroBundleLink');
+      const p = document.getElementById('heroBundlePrice');
+
+      if(!ALL_BUNDLES.length){
+        t.textContent = 'No bundles loaded';
+        s.textContent = 'Upload bundles.by_promotion.json to continue.';
+        if(p) p.querySelector('.amt').textContent = '—';
+        return;
+      }
+
+      // Highlight Promotion 10 (fallback to first item if missing)
+      const wanted = ALL_BUNDLES.find(x => String(x && x.promotion_id) === 'SALES-25');
+      const b = wanted || ALL_BUNDLES[0];
+
+      const items = Array.isArray(b.items) ? b.items : [];
+      const units = items.reduce((acc,i)=>acc + (Number(i.qty)||0), 0);
+
+      t.textContent = safe(b.bundle) || `Bundle ${safe(b.promotion_id)}`;
+      s.textContent = `${safe(b.category) || 'Team Bundle'} · Minimum ${Number(b.minimum_units||units)||units} users · ${units} included units`;
+
+      if(p){
+        p.querySelector('.cur').textContent = ''; p.querySelector('.amt').textContent = 'Formal quote';
+      }
+
+      const top = items.slice(0,3).map(i => `<li>${Number(i.qty)||0} × ${safe(i.name)||'Item'}</li>`).join('');
+      const more = items.length>3 ? `<li>+ ${items.length-3} more…</li>` : '';
+      u.innerHTML = top + more;
+
+      l.href = `bundle.html?bundle=${encodeURIComponent(safe(b.bundle || ''))}`;
+    }
+
+    function renderBundles(list){
+      const grid = document.getElementById('productGrid');
+      if(!list.length){
+        grid.innerHTML = '<p class="empty">No bundles match your filter.</p>';
+        return;
+      }
+
+      grid.innerHTML = list.map(b=>{
+        const items = Array.isArray(b.items) ? b.items : [];
+        const totalUnits = items.reduce((acc,i)=>acc + (Number(i.qty)||0), 0);
+        const top = items.slice(0,3).map(i => `<li>${Number(i.qty)||0} × ${safe(i.name)||'Item'}</li>`).join('');
+        const more = items.length>3 ? `<li>+ ${items.length-3} more…</li>` : '';
+
+        const priceHtml = `
+          <div class="price-row" aria-label="Bundle quote status">
+            <span class="price-label price-label--yellow"><strong>Quote status</strong></span>
+            <span class="price"><span class="cur"></span><span class="amt">Formal quote</span></span>
+          </div>
+        `;
+
+        return `
+          <article class="product-card">
+            <p class="p-meta">${safe(b.category) || 'Team Bundle'} · Minimum ${Number(b.minimum_units||totalUnits)||totalUnits} users</p>
+            <h3>${safe(b.bundle)||`Bundle ${safe(b.promotion_id)}`}</h3>
+            ${priceHtml}
+            <p class="p-sub"><strong>Outcome:</strong> ${safe(b.outcome) || 'Curated team technology bundle.'}</p>
+            <div class="bundle-meta-grid">
+              <div class="bundle-meta-item"><div class="k">Ideal For</div><div class="v">${safe(b.ideal_for) || safe(b.category) || 'Business teams'}</div></div>
+              <div class="bundle-meta-item"><div class="k">Deployment Size</div><div class="v">${safe(b.deployment_size) || ((Number(b.minimum_units||totalUnits)||totalUnits) + ' users')}</div></div>
+              <div class="bundle-meta-item"><div class="k">Technology</div><div class="v">${safe(b.technology_platform) || 'Enterprise business platforms'}</div></div>
+              <div class="bundle-meta-item"><div class="k">Lifecycle Grade</div><div class="v">${safe(b.lifecycle_grade) || 'Enterprise Refurbished'}</div></div>
+            </div>
+            <p class="p-sub">Bundle lines: ${items.length} · Included units: ${totalUnits}</p>
+            <ul class="hc-specs" style="margin-top:.5rem;">${top}${more}</ul>
+            <div class="p-actions">
+              <button class="ccm-btn small primary" data-add="${encodeURIComponent(safe(b.bundle))}">Add</button>
+              <a class="ccm-btn small ghost" href="bundle.html?bundle=${encodeURIComponent(safe(b.bundle))}">Details</a>
+            </div>
+            <p class="p-meta" style="margin-top:.6rem;">Lead time: ${safe(b.lead_time)||'Confirmed on quote'}</p>
+            <p class="p-meta" style="margin-top:.2rem;">Minimum order applies. Final specification and pricing confirmed on quote.</p>
+          </article>
+        `;
+      }).join('');
+
+      grid.querySelectorAll('button[data-add]').forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          const name = decodeURIComponent(btn.dataset.add);
+          const b = ALL_BUNDLES.find(x => safe(x.bundle) === safe(name));
+          if(!b) return;
+
+          const items = Array.isArray(b.items) ? b.items : [];
+          const units = items.reduce((acc,i)=>acc + (Number(i.qty)||0), 0);
+
+          const cart = getCart();
+          cart.push({
+            type:'bundle',
+            promotion_id: b.promotion_id,
+            bundle: safe(b.bundle),
+            name: safe(b.bundle),
+            qty: 1,
+            total_price: b.total_price,
+            currency: b.currency || 'ZAR',
+            units: units,
+            lead_time: safe(b.lead_time),
+            bundle_terms: safe(b.bundle_terms),
+            category: safe(b.category),
+            minimum_units: Number(b.minimum_units || units),
+            outcome: safe(b.outcome),
+            items: items
+          });
+          setCart(cart);
+          syncCartBadges();
+          alert('Business technology bundle added to quote cart');
+        });
+      });
+    }
+
+    function refresh(){
+      renderBundles(filterNow());
+    }
+
+    async function loadBundles(){
+      try{
+        const res = await fetch('assets/data/bundles.by_promotion.json', { cache:'force-cache' });
+        const data = await res.json();
+        ALL_BUNDLES = Array.isArray(data) ? data : [];
+
+        // Disable filters/search UI (requested), but keep rest of pipeline
+        buildFilters();
+
+        // Show all bundles (since UI controls removed)
+        ACTIVE_PROMO = 'all';
+        SEARCH_Q = '';
+
+        renderHero();
+        refresh();
+      }catch(e){
+        console.warn('Bundle data fetch failed; using static fallback cards.', e);
+      }
+    }
+
+    // Particles
+    (function(){
+      const c = document.getElementById('bgParticles');
+      if(!c) return;
+      const ctx = c.getContext('2d');
+      let w, h, dpr = window.devicePixelRatio || 1;
+
+      function resize(){
+        const bw = window.innerWidth, bh = window.innerHeight;
+        c.style.width = bw+'px'; c.style.height = bh+'px';
+        c.width = Math.floor(bw*dpr); c.height = Math.floor(bh*dpr);
+        ctx.setTransform(dpr,0,0,dpr,0,0);
+        w=bw; h=bh;
+      }
+      resize(); window.addEventListener('resize', resize);
+
+      const COUNT = 46;
+      const parts = Array.from({length:COUNT}).map(()=>({
+        x: Math.random()*w, y: Math.random()*h,
+        r: 1.2 + Math.random()*2.4,
+        vx: -0.22 + Math.random()*0.44,
+        vy: -0.22 + Math.random()*0.44,
+        o: 0.22 + Math.random()*0.42
+      }));
+
+      function tick(){
+        ctx.clearRect(0,0,w,h);
+        for(const p of parts){
+          p.x += p.vx; p.y += p.vy;
+          if(p.x < -20) p.x = w+10;
+          if(p.x > w+20) p.x = -10;
+          if(p.y < -20) p.y = h+10;
+          if(p.y > h+20) p.y = -10;
+
+          const grad = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*4);
+          grad.addColorStop(0, `rgba(0,198,255,${p.o+0.15})`);
+          grad.addColorStop(0.8, `rgba(255,210,63,0)`);
+          ctx.fillStyle = grad;
+          ctx.beginPath();
+          ctx.arc(p.x,p.y,p.r*4,0,Math.PI*2);
+          ctx.fill();
+        }
+        requestAnimationFrame(tick);
+      }
+      tick();
+    })();
+
+    loadBundles();
+  </script>
+<aside class="portal-personal-banner" style="position:fixed;bottom:18px;right:18px;z-index:30;max-width:320px;background:#132840;color:#fff;border:1px solid #6b8199;border-radius:14px;padding:16px;box-shadow:0 12px 30px #0007"><strong>Shopping for one laptop?</strong><p style="font-size:.88rem;margin:7px 0 12px">Explore our personal purchasing portal.</p><a href="employee-purchase.html" style="display:inline-block;background:#f4c85d;color:#0a1525;padding:9px 14px;border-radius:8px;font-weight:800">Shop personal laptops</a><button type="button" aria-label="Dismiss personal purchasing notice" onclick="this.parentElement.remove()" style="float:right;background:none;color:white;border:0;cursor:pointer">×</button></aside><div style="position:fixed;right:16px;bottom:16px;z-index:9999"><a href="shop.html" style="display:inline-block;padding:12px 18px;border-radius:12px;background:#eec86f;color:#0b1829;font-weight:800;text-decoration:none;box-shadow:0 10px 35px #0007">New personal shop →</a></div></body>
+</html>

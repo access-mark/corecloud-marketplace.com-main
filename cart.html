@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>Quote Cart — CoreCloud Procurement</title>
+  <meta name="description" content="Quote cart — CoreCloud Procurement. Business technology bundles are quote-first with minimum-order deployment packages." />
+
+  <link rel="preload" href="assets/css/marketplace.css" as="style" />
+  <link rel="stylesheet" href="assets/css/marketplace.css" />
+  <link rel="preload" href="assets/images/corecloud-neon-logo.png" as="image" />
+  <link rel="icon" href="assets/images/corecloud-neon-logo.png" />
+  <script defer src="assets/js/auth.js"></script>
+
+  <meta name="theme-color" content="#050b18" />
+  <link rel="canonical" href="https://www.corecloud-marketplace.com/cart.html" />
+
+  <style>
+    /* =======================
+       MATCH HOME/BUNDLE BASE
+       ======================= */
+    html, body{ margin:0; padding:0; min-height:100%; }
+    body{
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:#050b18;
+      color:#e6eefc;
+      line-height:1.5;
+      position:relative;
+      overflow-x:hidden;
+    }
+    a{ color:inherit; text-decoration:none; }
+    .ccm-shell{ width:100%; max-width:1120px; margin:0 auto; padding:0 1.25rem; }
+    .ccm-main{ padding-top:135px; }
+
+    .ccm-header{
+      position:fixed; top:0; left:0; right:0; z-index:20;
+      backdrop-filter:blur(14px);
+      background:rgba(5,11,24,0.94);
+      border-bottom:1px solid rgba(255,255,255,0.06);
+      box-shadow:0 18px 40px rgba(0,0,0,0.55);
+    }
+    .ccm-header-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      height:120px; column-gap:1.5rem;
+    }
+    .ccm-brand{ display:flex; align-items:center; gap:.75rem; }
+    .ccm-logo{ height:96px; filter:drop-shadow(0 0 14px rgba(0,180,255,0.45)); }
+    .ccm-brand-text{ display:flex; flex-direction:column; }
+    .ccm-brand-title{ font-weight:600; font-size:1rem; }
+    .ccm-brand-tagline{ font-size:.8rem; color:rgba(230,238,252,0.75); }
+
+    .ccm-nav{ display:flex; align-items:center; gap:.75rem; }
+    .ccm-nav-link{
+      padding:.4rem .75rem; border-radius:999px; font-size:.9rem; opacity:.8;
+      transition:background .16s ease, opacity .16s ease, transform .08s ease, box-shadow .16s ease;
+    }
+    .ccm-nav-link:hover{ opacity:1; background:rgba(255,255,255,0.06); transform:translateY(-1px); }
+    .ccm-nav-link.is-active{
+      background:#f5b400; color:#050b18; opacity:1;
+      box-shadow:0 0 0 1px rgba(245,180,0,.45), 0 14px 30px rgba(245,180,0,.22);
+    }
+
+    .ccm-actions{ display:flex; align-items:center; gap:.75rem; }
+
+    /* Header basket (match index changes) */
+    .ccm-cart-link{
+      font-size:.85rem; padding:.35rem .9rem; border-radius:999px;
+      border:1px solid rgba(255,255,255,0.18);
+      background:rgba(5,11,24,0.8);
+      display:inline-flex; align-items:center; gap:.55rem;
+    }
+    .ccm-cart-ico{
+      width:26px; height:26px; display:inline-block;
+      color:#f5b400;
+      filter:drop-shadow(0 0 14px rgba(245,180,0,0.28));
+    }
+
+    .ccm-burger{
+      display:none; background:none; border:1px solid rgba(255,255,255,.4);
+      color:#e6eefc; padding:.35rem .7rem; border-radius:999px;
+      font-size:.8rem; cursor:pointer;
+    }
+    .ccm-burger span{ display:block; width:16px; height:1.6px; background:#e6eefc; margin:3px 0; }
+
+    .ccm-btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:.55rem 1.2rem; border-radius:999px;
+      border:1px solid transparent; font-size:.85rem; cursor:pointer;
+      transition:background .16s ease, border-color .16s ease, transform .08s ease, box-shadow .16s ease;
+      white-space:nowrap;
+    }
+    .ccm-btn.primary{ background:#f5b400; color:#050b18; border-color:#f5b400; box-shadow:0 12px 24px rgba(245,180,0,.22); }
+    .ccm-btn.primary:hover{ transform:translateY(-1px); box-shadow:0 18px 34px rgba(245,180,0,.26); }
+    .ccm-btn.ghost{ background:transparent; border-color:rgba(255,255,255,0.4); }
+    .ccm-btn.ghost:hover{ background:rgba(255,255,255,0.06); box-shadow:0 0 0 1px rgba(0,198,255,.22), 0 16px 34px rgba(0,198,255,.12); }
+    .ccm-btn.small{ padding:.35rem .8rem; font-size:.8rem; }
+
+    /* =======================
+       TEAM BUNDLES BANNER (HOME)
+       ======================= */
+    .firesale-banner{
+      position:fixed;
+      top:120px; left:0; right:0;
+      z-index:19;
+      border-bottom:1px solid rgba(255,255,255,0.08);
+      background:linear-gradient(90deg, rgba(245,180,0,0.16), rgba(0,198,255,0.14), rgba(245,180,0,0.16));
+      backdrop-filter:blur(14px);
+      box-shadow:0 18px 40px rgba(0,0,0,0.55);
+      min-height:75px;
+    }
+    .firesale-inner{
+      width:100%; max-width:1120px; margin:0 auto; padding:1.3rem 1.25rem;
+      display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;
+    }
+    .fs-left{ display:flex; align-items:center; gap:.75rem; flex-wrap:wrap; }
+    .fs-badge{
+      display:inline-flex; align-items:center; gap:.45rem;
+      padding:.25rem .7rem;
+      border-radius:999px;
+      font-size:.72rem;
+      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      color:#050b18;
+      background:linear-gradient(135deg,#f5b400,#ffd970);
+      box-shadow:0 10px 22px rgba(245,180,0,0.28), 0 0 18px rgba(245,180,0,0.35);
+    }
+    .fs-text{ font-size:.85rem; color:rgba(230,238,252,0.92); }
+    .fs-text strong{ color:#ffd970; }
+    .fs-cta{ display:flex; gap:.5rem; align-items:center; }
+    .fs-mini{ font-size:.78rem; padding:.38rem .85rem; }
+
+    /* =======================
+       CART PAGE UI (UPGRADED)
+       ======================= */
+    .cart-page{
+      padding:1rem 0 2.4rem;
+      padding-top: calc(1rem + 2px);
+    }
+    .crumbs{
+      font-size:.75rem; color:rgba(230,238,252,0.7);
+      margin-bottom:1rem;
+    }
+    .crumbs a{ text-decoration:underline; text-underline-offset:2px; }
+    .cart-head{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:1rem; flex-wrap:wrap;
+      margin-bottom:1.25rem;
+    }
+    .badge{
+      font-size:.75rem; text-transform:uppercase; letter-spacing:.16em;
+      color:#ffd970; margin:0 0 .6rem;
+    }
+    h1{ font-size:2.1rem; line-height:1.1; margin:0 0 .5rem; }
+    .subtitle{ font-size:1rem; max-width:44rem; color:rgba(230,238,252,0.88); margin:0; }
+
+    .cart-grid{
+      display:grid;
+      grid-template-columns: 1.6fr .95fr;
+      gap:1.25rem;
+      align-items:start;
+    }
+    @media (max-width: 980px){ .cart-grid{ grid-template-columns:1fr; } }
+
+    .panel{
+      border-radius:18px;
+      padding:1.1rem 1.1rem 1.15rem;
+      background:rgba(9,18,40,0.88);
+      border:1px solid rgba(0,198,255,0.22);
+      box-shadow:0 16px 38px rgba(0,0,0,0.55), 0 0 22px rgba(0,198,255,0.12);
+      backdrop-filter:blur(14px);
+      position:relative;
+      overflow:hidden;
+    }
+    .panel:before{
+      content:"";
+      position:absolute; inset:-1px;
+      border-radius:18px;
+      pointer-events:none;
+      background:linear-gradient(135deg, rgba(0,198,255,0.18), rgba(245,180,0,0.12), rgba(0,198,255,0.06));
+      opacity:.85;
+      mix-blend-mode:screen;
+    }
+    .panel > *{ position:relative; z-index:1; }
+
+    .login-gate{
+      margin:0 0 1rem 0;
+      border-radius:16px;
+      padding:.9rem 1rem;
+      background:linear-gradient(180deg, rgba(245,180,0,0.10), rgba(9,18,40,0.70));
+      border:1px solid rgba(245,180,0,0.25);
+      box-shadow:0 14px 34px rgba(0,0,0,0.45), 0 0 18px rgba(245,180,0,0.12);
+      color:rgba(230,238,252,0.92);
+    }
+    .login-gate a{ text-decoration:underline; text-underline-offset:2px; color:#ffd970; }
+
+    .cart-items-top{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:1rem; flex-wrap:wrap;
+      margin-bottom:.35rem;
+    }
+    .cart-items-top h2{ margin:0; font-size:1.05rem; }
+    .mini-actions{ display:flex; gap:.5rem; flex-wrap:wrap; }
+    .mini-link{
+      font-size:.8rem;
+      padding:.35rem .75rem;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.16);
+      background:rgba(5,11,24,0.65);
+      opacity:.9;
+    }
+    .mini-link:hover{ opacity:1; box-shadow:0 0 0 1px rgba(0,198,255,.18), 0 16px 34px rgba(0,0,0,.5); }
+
+    .cart-list{ margin-top:.6rem; }
+    .cart-item{
+      display:grid;
+      grid-template-columns: 1fr auto;
+      gap:1rem;
+      padding:1rem 0;
+      border-bottom:1px solid rgba(255,255,255,0.08);
+    }
+    .cart-item:last-child{ border-bottom:none; }
+
+    .item-title{ margin:.05rem 0 .35rem; font-size:1.05rem; }
+    .item-meta{
+      font-size:.8rem;
+      color:rgba(230,238,252,0.75);
+      margin:.15rem 0;
+    }
+    .item-meta strong{ color:#ffd970; font-weight:700; }
+    .item-link{
+      display:inline-block;
+      margin-top:.45rem;
+      font-size:.8rem;
+      text-decoration:underline;
+      text-underline-offset:2px;
+      opacity:.9;
+    }
+
+    .rightbox{ text-align:right; }
+    .qty-wrap{
+      display:flex; align-items:center; justify-content:flex-end;
+      gap:.45rem;
+    }
+    .qty-label{ font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; opacity:.65; }
+    .qty-input{
+      width:78px;
+      border-radius:999px;
+      border:1px solid rgba(0,198,255,.55);
+      padding:.42rem .7rem;
+      font-size:.85rem;
+      background:rgba(5,11,24,0.85);
+      color:#e6eefc;
+      outline:none;
+      box-shadow:0 0 0 1px rgba(0,198,255,.10);
+      text-align:center;
+    }
+    .qty-input:focus{
+      box-shadow:0 0 0 1px rgba(0,198,255,.28), 0 0 22px rgba(0,198,255,.10);
+    }
+
+    .pill-note{
+      display:inline-flex;
+      align-items:center;
+      gap:.4rem;
+      margin-top:.55rem;
+      padding:.28rem .65rem;
+      border-radius:999px;
+      font-size:.75rem;
+      border:1px solid rgba(255,255,255,0.12);
+      background:rgba(255,255,255,0.04);
+      opacity:.92;
+    }
+    .pill-note b{ color:#ffd970; }
+
+    .remove-btn{
+      margin-top:.55rem;
+      display:inline-flex;
+      justify-content:center;
+      padding:.28rem .65rem;
+      border-radius:999px;
+      border:1px solid rgba(255,88,88,.28);
+      background:rgba(255,88,88,.08);
+      color:rgba(255,140,140,.95);
+      font-size:.75rem;
+      cursor:pointer;
+    }
+    .remove-btn:hover{
+      box-shadow:0 0 0 1px rgba(255,88,88,.22), 0 14px 30px rgba(0,0,0,.45);
+      transform:translateY(-1px);
+    }
+
+    .price-row{
+      display:flex; align-items:baseline; justify-content:space-between;
+      gap:.75rem; flex-wrap:wrap;
+      margin:.45rem 0 .55rem;
+      padding:.55rem .75rem;
+      border-radius:14px;
+      background:linear-gradient(180deg, rgba(6,14,34,.86), rgba(5,11,24,.62));
+      border:1px solid rgba(0,198,255,.18);
+      box-shadow:0 0 0 1px rgba(0,198,255,.10), 0 18px 40px rgba(0,0,0,.45);
+    }
+    .price-label{ font-size:.8rem; opacity:.82; letter-spacing:.02em; }
+    .price{
+      display:inline-flex; align-items:baseline; gap:.3rem;
+      font-weight:700;
+      white-space:nowrap;
+      text-shadow:0 0 18px rgba(0,198,255,.22);
+    }
+    .price .cur{ font-size:.85rem; opacity:.9; }
+    .price .amt{ font-size:1.05rem; }
+
+    .summary-line{ display:flex; justify-content:space-between; padding:.35rem 0; font-size:.92rem; color:rgba(230,238,252,0.9); }
+    .summary-line.total{
+      font-weight:800;
+      border-top:1px solid rgba(255,255,255,0.10);
+      margin-top:.45rem;
+      padding-top:.65rem;
+    }
+    .hint{ font-size:.78rem; color:rgba(156,169,198,1); margin-top:.55rem; }
+
+    .checkout-form label{ display:block; font-size:.78rem; letter-spacing:.06em; text-transform:uppercase; opacity:.8; margin:.85rem 0 .35rem; }
+    .checkout-form input,
+    .checkout-form textarea,
+    .checkout-form select{
+      width:100%;
+      border-radius:14px;
+      border:1px solid rgba(0,198,255,.30);
+      padding:.62rem .8rem;
+      font-size:.9rem;
+      background:rgba(5,11,24,0.82);
+      color:#e6eefc;
+      outline:none;
+      box-shadow:0 0 0 1px rgba(0,198,255,.10);
+    }
+    .checkout-form input:focus,
+    .checkout-form textarea:focus,
+    .checkout-form select:focus{
+      box-shadow:0 0 0 1px rgba(0,198,255,.28), 0 0 26px rgba(0,198,255,.10);
+    }
+    .checkout-form textarea{ resize:vertical; }
+
+    .empty{
+      font-size:.95rem;
+      color:rgba(230,238,252,0.82);
+      padding:.4rem 0 .2rem;
+    }
+
+    .ccm-footer{
+      border-top:1px solid rgba(255,255,255,0.08);
+      background:#050712;
+      padding:2rem 0 1.5rem;
+      margin-top:2.5rem;
+    }
+
+    /* =======================
+       FLOATING BASKET (NEW)
+       ======================= */
+    .float-basket{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      z-index:50;
+      display:none; /* shown via JS when cart has items */
+    }
+    .float-basket a{
+      display:flex;
+      align-items:center;
+      gap:.6rem;
+      border-radius:999px;
+      padding:.62rem .85rem;
+      background:rgba(9,18,40,0.92);
+      border:1px solid rgba(0,198,255,0.42);
+      box-shadow:0 18px 40px rgba(0,0,0,0.55), 0 0 22px rgba(0,198,255,0.14);
+      backdrop-filter:blur(14px);
+      transition:transform .10s ease, box-shadow .16s ease, border-color .16s ease, background .16s ease, opacity .16s ease;
+      opacity:.96;
+    }
+    .float-basket a:hover{
+      transform:translateY(-2px);
+      border-color:rgba(0,198,255,0.65);
+      box-shadow:0 22px 50px rgba(0,0,0,0.62), 0 0 26px rgba(0,198,255,0.18);
+      opacity:1;
+    }
+    .fb-icon{
+      width:34px; height:34px;
+      border-radius:999px;
+      display:grid; place-items:center;
+      background:linear-gradient(135deg, rgba(0,198,255,0.18), rgba(245,180,0,0.14));
+      border:1px solid rgba(255,255,255,0.10);
+      box-shadow:0 0 18px rgba(0,198,255,0.14);
+    }
+    .fb-icon svg{ width:18px; height:18px; }
+    .fb-text{ display:flex; flex-direction:column; line-height:1.05; }
+    .fb-title{ font-size:.78rem; opacity:.9; }
+    .fb-sub{ font-size:.72rem; color:rgba(230,238,252,0.78); }
+    .fb-count{
+      margin-left:.35rem;
+      min-width:28px;
+      height:28px;
+      padding:0 .55rem;
+      border-radius:999px;
+      display:inline-flex; align-items:center; justify-content:center;
+      background:linear-gradient(135deg,#f5b400,#ffd970);
+      color:#050b18;
+      font-weight:900;
+      font-size:.78rem;
+      box-shadow:0 12px 24px rgba(245,180,0,.22);
+    }
+    @media (max-width:720px){
+      .float-basket{ right:14px; bottom:14px; }
+      .float-basket a{ padding:.58rem .78rem; }
+      .fb-text{ display:none; } /* keep compact on mobile */
+    }
+
+    /* Particles */
+    #bgParticles{
+      position:fixed; inset:0; width:100vw; height:100vh; z-index:0;
+      pointer-events:none; filter:drop-shadow(0 0 18px rgba(0,198,255,.25));
+    }
+    body.has-particles .ccm-header,
+    body.has-particles .ccm-main,
+    body.has-particles .ccm-footer{ position:relative; z-index:1; background:transparent; }
+
+    @media (max-width:720px){
+      .firesale-banner{ top:0; position:sticky; }
+      .firesale-inner{ padding:.65rem 1.1rem; }
+      .fs-text{ font-size:.82rem; }
+
+      .ccm-header-inner{ height:auto; padding:.75rem 0; }
+      .ccm-logo{ height:72px; }
+      .ccm-burger{ display:inline-flex; }
+      .ccm-nav{ display:none; flex-direction:column; align-items:flex-start; margin-top:.75rem; width:100%; }
+      .ccm-nav.open{
+        display:flex;
+        background:radial-gradient(circle at top, rgba(11,22,52,0.98), rgba(5,11,24,0.98));
+        padding:.75rem .9rem;
+        border-radius:18px;
+        border:1px solid rgba(255,255,255,0.08);
+        box-shadow:0 18px 40px rgba(0,0,0,0.8);
+      }
+      .ccm-main{ padding-top:135px; }
+      .cart-page{ padding-top:2.6rem; }
+      .qty-input{ width:72px; }
+    }
+  </style>
+</head>
+
+<body class="has-particles" id="top">
+  <canvas id="bgParticles" aria-hidden="true"></canvas>
+
+  <!-- HEADER -->
+  <header class="ccm-header">
+    <div class="ccm-shell ccm-header-inner">
+      <a href="index.html" class="ccm-brand">
+        <img src="assets/images/corecloud-neon-logo.png" alt="CoreCloud Procurement" class="ccm-logo" width="256" height="256" decoding="async" />
+        <div class="ccm-brand-text">
+          <span class="ccm-brand-title">CoreCloud Procurement</span>
+          <span class="ccm-brand-tagline">Business technology bundles</span>
+        </div>
+      </a>
+
+      <nav class="ccm-nav" aria-label="Main navigation">
+        <a href="index.html" class="ccm-nav-link">Home</a>
+        <a href="lifecycle.html" class="ccm-nav-link">Lifecycle</a>
+        <a href="employee-purchase.html" class="ccm-nav-link">Personal Laptops</a>
+        <a href="terms.html" class="ccm-nav-link">Terms</a>
+        <a href="warranty.html" class="ccm-nav-link">Warranty</a>
+        <a href="cart.html" class="ccm-nav-link is-active" aria-current="page">Cart</a>
+      </nav>
+
+      <div class="ccm-actions">
+        <!-- Cart -> Basket icon (match index changes) -->
+        <a href="cart.html" class="ccm-cart-link" aria-label="Basket">
+          <svg class="ccm-cart-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M7 10h10l-1.2 9H8.2L7 10Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+            <path d="M9 10V7.6A3 3 0 0 1 12 4.6a3 3 0 0 1 3 3V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M6.4 10H5.2c-.6 0-1 .4-1 1v0c0 .6.4 1 1 1H6.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M17.4 10h1.4c.6 0 1 .4 1 1v0c0 .6-.4 1-1 1H17.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+          (<span id="ccmCartCount">0</span>)
+        </a>
+        <button class="ccm-burger" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+  </div>
+
+  <!-- FLOATING BASKET (visible on page, especially useful if you add it to other pages too) -->
+  <div class="float-basket" id="floatBasket" aria-live="polite">
+    <a href="cart.html" aria-label="Open cart">
+      <span class="fb-icon" aria-hidden="true">
+        <!-- simple basket icon -->
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6.5 10.5L4.5 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M17.5 10.5L19.5 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M3.8 10.5H20.2L19 20H5L3.8 10.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+          <path d="M9 10.5V8.8C9 7.25 10.25 6 11.8 6H12.2C13.75 6 15 7.25 15 8.8V10.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span class="fb-text">
+        <span class="fb-title">Quote cart</span>
+        <span class="fb-sub"><span id="fbCountText">0</span> bundles</span>
+      </span>
+      <span class="fb-count" id="fbCount">0</span>
+    </a>
+  </div>
+
+  <main class="ccm-main">
+    <section class="ccm-shell cart-page">
+      <p class="crumbs">
+        <a href="index.html#featured">Bundles</a> / <span>Your cart</span>
+      </p>
+
+      <div class="cart-head">
+        <div>
+          <p class="badge">CoreCloud Procurement · Quote cart</p>
+          <h1>Quote cart</h1>
+          <!-- add VAT note to match index requirement -->
+          <p class="subtitle">Review selected team bundles, then request a formal quote. CoreCloud confirms specification, lifecycle grade, availability, warranty, pricing and lead time before billing.</p>
+        </div>
+        <div style="display:flex; gap:.6rem; flex-wrap:wrap;">
+          <a href="index.html#featured" class="ccm-btn ghost">Add more bundles</a>
+          <button class="ccm-btn ghost" id="clearCartBtn" type="button">Clear cart</button>
+        </div>
+      </div>
+
+      <div id="loginGate" class="login-gate" style="display:none;">
+        You’re not logged in. You can still submit a quote, but <a href="login.html?from=cart">login</a> to prefill details.
+      </div>
+
+      <div class="cart-grid">
+        <!-- LEFT: Items -->
+        <div class="panel">
+          <div class="cart-items-top">
+            <h2>Items</h2>
+            <div class="mini-actions">
+              <a class="mini-link" href="index.html#featured">Browse</a>
+              <a class="mini-link" href="terms.html">Terms</a>
+            </div>
+          </div>
+
+          <div class="cart-list" id="cartItems"></div>
+        </div>
+
+        <!-- RIGHT: Summary + Form -->
+        <div class="panel">
+          <h2 style="margin:0 0 .55rem; font-size:1.05rem;">Order summary</h2>
+          <div id="summary"></div>
+
+          <div class="price-row" aria-label="Bundle model">
+            <span class="price-label">Bundle model</span>
+            <span class="price"><span class="cur">Min order</span><span class="amt">Quote-first</span></span>
+          </div>
+
+          <h3 style="font-size:.98rem;margin:1.1rem 0 .6rem;">Request formal quote</h3>
+
+          <form class="checkout-form" id="checkoutForm" action="https://formsubmit.co/sales@corecloudza.com" method="POST">
+            <input type="hidden" name="_subject" id="formSubject" value="[Procurement] Quote Request" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_captcha" value="true" />
+            <input type="hidden" name="_next" value="https://www.corecloud-marketplace.com/thank-you.html" />
+            <input type="hidden" name="_cc" value="mark@corecloudza.com" />
+            <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
+
+            <input type="hidden" name="source" value="CoreCloud Procurement" />
+            <input type="hidden" name="submission_type" id="submission_type" value="Bundle quote request" />
+            <input type="hidden" name="submission_date" id="submission_date" />
+            <input type="hidden" name="page_url" id="page_url" />
+            <input type="hidden" name="bundle_summary" id="bundle_summary" />
+            <input type="hidden" name="deployment_summary" id="deployment_summary" />
+
+            <label>Company / Customer name</label>
+            <input type="text" id="company" name="company" required />
+
+            <label>Contact person</label>
+            <input type="text" id="contact" name="contact" required />
+
+            <label>Email</label>
+            <input type="email" id="email" name="email" required />
+
+            <label>Phone</label>
+            <input type="tel" id="phone" name="phone" placeholder="+27 ..." required />
+
+            <label>VAT Number</label>
+            <input type="text" id="vat" name="vat" />
+
+            <label>Delivery address</label>
+            <textarea id="address" name="address" rows="2" required></textarea>
+
+            <label>PO number (optional)</label>
+            <input type="text" id="po" name="po" />
+
+            <label>Custom bundle requirements</label>
+            <textarea id="custom_requirements" name="custom_requirements" rows="4" placeholder="Example: 25 sales users, ThinkPad preferred, docks and bags required, budget range, delivery timeline."></textarea>
+
+            <label>Mode</label>
+            <select id="mode" name="mode">
+              <option value="invoice">Send me an invoice</option>
+              <option value="quote" selected>Send me a formal quote</option>
+            </select>
+
+            <input type="hidden" name="cart_contents" id="cart_contents" />
+            <input type="hidden" name="user_profile_json" id="user_profile_json" />
+
+            <button type="submit" class="ccm-btn primary" style="width:100%;margin-top:.85rem;">Submit quote request</button>
+            <p class="hint">Bundles are quote-first. We confirm specification, lifecycle grade, availability, warranty, pricing and lead time before billing.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="ccm-footer">
+    <div class="ccm-shell" style="font-size:.85rem;opacity:.85;display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between;">
+      <div>© <span id="year"></span> CoreCloud Marketplace (Pty) Ltd.</div>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <a href="index.html" style="text-decoration:underline;text-underline-offset:3px;">Home</a>
+        <a href="lifecycle.html" style="text-decoration:underline;text-underline-offset:3px;">Lifecycle</a>
+        <a href="terms.html" style="text-decoration:underline;text-underline-offset:3px;">Terms</a>
+        <a href="warranty.html" style="text-decoration:underline;text-underline-offset:3px;">Warranty</a>
+        <!-- Footer cart -> Basket icon yellow (match index changes) -->
+        <a href="cart.html" style="text-decoration:underline;text-underline-offset:3px;display:inline-flex;align-items:center;gap:.35rem;">
+          <svg class="ccm-cart-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M7 10h10l-1.2 9H8.2L7 10Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+            <path d="M9 10V7.6A3 3 0 0 1 12 4.6a3 3 0 0 1 3 3V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M6.4 10H5.2c-.6 0-1 .4-1 1v0c0 .6.4 1 1 1H6.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M17.4 10h1.4c.6 0 1 .4 1 1v0c0 .6-.4 1-1 1H17.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+          Cart
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile nav toggle (consistent)
+    (function(){
+      const toggle = document.getElementById('menuToggle');
+      const nav = document.querySelector('.ccm-nav');
+      if(!toggle || !nav) return;
+      toggle.addEventListener('click', () => {
+        const open = nav.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', String(open));
+      });
+    })();
+
+    // Cart helpers
+    function getCart(){
+      try{
+        const raw = localStorage.getItem('ccm-cart');
+        if(!raw) return [];
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) ? parsed : [];
+      }catch(e){
+        return [];
+      }
+    }
+    function setCart(c){ localStorage.setItem('ccm-cart', JSON.stringify(c)); }
+
+    function syncCartBadges(){
+      const c = getCart();
+      const count = c.length;
+
+      // Header count
+      const headSpan = document.getElementById('ccmCartCount');
+      if(headSpan) headSpan.textContent = String(count);
+
+      // Floating basket
+      const fb = document.getElementById('floatBasket');
+      const fbCount = document.getElementById('fbCount');
+      const fbCountText = document.getElementById('fbCountText');
+
+      if(fbCount) fbCount.textContent = String(count);
+      if(fbCountText) fbCountText.textContent = String(count);
+
+      // show/hide
+      if(fb){
+        fb.style.display = count > 0 ? 'block' : 'none';
+      }
+    }
+
+    // Clear cart
+    document.getElementById('clearCartBtn').addEventListener('click', ()=>{
+      if(!confirm('Clear all items from cart?')) return;
+      setCart([]);
+      renderCart();
+      syncCartBadges();
+    });
+
+    // login gate + prefill
+    const gate = document.getElementById('loginGate');
+    function enforceLogin(){
+      const user = (window.CCMAuth && CCMAuth.getUser && CCMAuth.getUser()) || null;
+      if(!user || !user.email){
+        gate.style.display = 'block';
+      } else {
+        gate.style.display = 'none';
+        const f = (id, val)=>{ const el = document.getElementById(id); if(el && val && !el.value) el.value = val; };
+        f('email', user.email);
+        f('phone', user.phone);
+        f('company', user.company);
+        f('contact', [user.first_name, user.last_name].filter(Boolean).join(' '));
+        f('vat', user.vat);
+        f('address', user.delivery);
+        const up = document.getElementById('user_profile_json');
+        if(up) up.value = JSON.stringify(user);
+      }
+    }
+
+    // Pricing / display helpers
+    function safe(s){ return String(s || '').trim(); }
+    function formatZAR(n){
+      const v = Number(n);
+      if(!isFinite(v)) return null;
+      return v.toLocaleString('en-ZA', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+    function computeCartTotals(cart){
+      let total = 0;
+      let hasAnyPrice = false;
+
+      for(const it of cart){
+        const qty = Number(it.qty) > 0 ? Number(it.qty) : 1;
+        const price = (it && it.total_price != null) ? Number(it.total_price) : NaN;
+        if(isFinite(price)){
+          total += price * qty;
+          hasAnyPrice = true;
+        }
+      }
+      return { hasAnyPrice, total };
+    }
+
+    function renderCart(){
+      const cart = getCart();
+      const box = document.getElementById('cartItems');
+      const sum = document.getElementById('summary');
+
+      if(!cart.length){
+        box.innerHTML = '<p class="empty">No bundles yet. Add business technology bundles from the procurement platform.</p>';
+        sum.innerHTML = `
+          <div class="summary-line"><span>Bundles</span><span>0</span></div>
+          <div class="summary-line total"><span>Estimated total (excl. VAT)</span><span>—</span></div>
+          <p class="hint">Add bundles, then request a formal quote.</p>
+        `;
+        return;
+      }
+
+      const totals = computeCartTotals(cart);
+      const totalText = totals.hasAnyPrice ? `R ${formatZAR(totals.total)}` : 'Quote required';
+
+      box.innerHTML = cart.map((item, idx)=>{
+        const qty = Number(item.qty) > 0 ? Number(item.qty) : 1;
+
+        if(item.type === 'bundle'){
+          const title = item.bundle || item.name || 'Bundle';
+          const promoId = item.category || ((item.promotion_id != null) ? `Bundle ${safe(item.promotion_id)}` : '');
+          const lead = safe(item.lead_time) || 'Confirmed on quote';
+          const units = Number(item.units) || (Array.isArray(item.items) ? item.items.reduce((a,i)=>a+(Number(i.qty)||0),0) : 0);
+          const stock = (item.stock_bundles != null) ? Number(item.stock_bundles) : null;
+
+          const unitPrice = 'Formal quote';
+
+          return `
+            <div class="cart-item">
+              <div>
+                <h3 class="item-title">${title}</h3>
+                <div class="item-meta">${promoId}${promoId ? ' · ' : ''}<span><strong>Minimum-order team bundle</strong></span></div>
+                <div class="item-meta">Lines: ${Array.isArray(item.items)?item.items.length:'—'} · Included units: ${units}${item.minimum_units ? ` · Minimum order: ${item.minimum_units} users` : ''}</div>
+                <div class="item-meta">Lead time: ${lead}</div>
+                <a class="item-link" href="bundle.html?bundle=${encodeURIComponent(title)}">View bundle</a>
+              </div>
+
+              <div class="rightbox">
+                <div class="qty-wrap">
+                  <span class="qty-label">Qty</span>
+                  <input type="number" min="1" value="${qty}" data-idx="${idx}" class="qty-input" />
+                </div>
+
+                <div class="pill-note" title="Formal quote required; excludes delivery and VAT until confirmed">
+                  <span>Quote status:</span> <b>${unitPrice}</b>
+                </div>
+
+                <button class="remove-btn" data-remove="${idx}" type="button">Remove</button>
+              </div>
+            </div>
+          `;
+        }
+
+        const name = item.name || 'Item';
+        const sku  = item.sku || '-';
+        return `
+          <div class="cart-item">
+            <div>
+              <h3 class="item-title">${safe(name)}</h3>
+              <div class="item-meta">SKU: ${safe(sku)}</div>
+              <div class="item-meta"><strong>Quote required</strong></div>
+            </div>
+            <div class="rightbox">
+              <div class="qty-wrap">
+                <span class="qty-label">Qty</span>
+                <input type="number" min="1" value="${qty}" data-idx="${idx}" class="qty-input" />
+              </div>
+              <button class="remove-btn" data-remove="${idx}" type="button">Remove</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      const itemCount = cart.reduce((a,it)=>a + (Number(it.qty)>0?Number(it.qty):1), 0);
+      const bundlesCount = cart.length;
+
+      sum.innerHTML = `
+        <div class="summary-line"><span>Bundles</span><span>${bundlesCount}</span></div>
+        <div class="summary-line"><span>Total quantity</span><span>${itemCount}</span></div>
+        <div class="summary-line"><span>Delivery</span><span>Quoted</span></div>
+        <div class="summary-line total"><span>Estimated total (excl. VAT)</span><span>${totalText}</span></div>
+        <p class="hint">Delivery, warranty, availability and lead time confirmed on quote.</p>
+      `;
+
+      box.querySelectorAll('.qty-input').forEach(inp=>{
+        inp.addEventListener('change', e=>{
+          const i = Number(e.target.getAttribute('data-idx'));
+          const list = getCart();
+          let val = parseInt(e.target.value, 10);
+          if(isNaN(val) || val < 1) val = 1;
+          list[i].qty = val;
+          setCart(list);
+          renderCart();
+          syncCartBadges();
+        });
+      });
+
+      box.querySelectorAll('[data-remove]').forEach(btn=>{
+        btn.addEventListener('click', e=>{
+          const i = Number(e.target.getAttribute('data-remove'));
+          const list = getCart();
+          list.splice(i,1);
+          setCart(list);
+          renderCart();
+          syncCartBadges();
+        });
+      });
+    }
+
+    // Submit payload
+    document.getElementById('checkoutForm').addEventListener('submit', (e)=>{
+      const cart = getCart();
+      const customReq = (document.getElementById('custom_requirements')?.value || '').trim();
+      const isCustomRequest = new URLSearchParams(window.location.search).has('custom') || customReq.length > 0;
+      if(!cart.length && !isCustomRequest){
+        e.preventDefault();
+        alert('Your cart is empty. Add a bundle or complete the custom bundle requirements field.');
+        return;
+      }
+
+      const lines = cart.length ? cart.map((it)=>{
+        const qty = it.qty || 1;
+        if(it.type === 'bundle'){
+          const title = it.bundle || it.name || 'Bundle';
+          const promo = it.category || ((it.promotion_id != null) ? `Bundle ${it.promotion_id}` : 'Bundle');
+          const total = 'Formal quote required';
+          const items = Array.isArray(it.items) ? it.items : [];
+          const itemLines = items.map(x => `   - ${Number(x.qty)||0} × ${x.name||'Item'} (SKU: ${x.sku||'-'})`).join('\n');
+          return `${qty} × BUNDLE: ${title} [${promo}] | Quote status: ${total}\n${itemLines}\n   - TERMS: Minimum-order team bundle. Final specification, warranty, pricing and lead time confirmed on quote.`;
+        }
+        return `${qty} × ${it.name||'Item'} (SKU: ${it.sku||'-'})`;
+      }).join('\n\n') : `CUSTOM PROCUREMENT REQUEST ONLY\nRequirements: ${customReq || 'Customer requested a custom bundle consultation.'}`;
+
+      document.getElementById('cart_contents').value = lines;
+
+      const subjectEl = document.getElementById('formSubject');
+      const submissionTypeEl = document.getElementById('submission_type');
+      const submissionDateEl = document.getElementById('submission_date');
+      const pageUrlEl = document.getElementById('page_url');
+      const bundleSummaryEl = document.getElementById('bundle_summary');
+      const deploymentSummaryEl = document.getElementById('deployment_summary');
+
+      const company = (document.getElementById('company')?.value || '').trim();
+      const bundleNames = cart
+        .map(it => it.bundle || it.name || '')
+        .filter(Boolean);
+      const uniqueBundles = [...new Set(bundleNames)];
+      const firstBundle = uniqueBundles[0] || '';
+      const totalUnits = cart.reduce((sum, it) => sum + (Number(it.minimum_units || 0) * Number(it.qty || 1)), 0);
+
+      if(submissionDateEl) submissionDateEl.value = new Date().toISOString();
+      if(pageUrlEl) pageUrlEl.value = window.location.href;
+      if(bundleSummaryEl) bundleSummaryEl.value = uniqueBundles.length ? uniqueBundles.join(' | ') : 'Custom procurement request';
+      if(deploymentSummaryEl) deploymentSummaryEl.value = totalUnits ? `${totalUnits} estimated users / minimum units selected` : 'Custom quantity to be confirmed';
+
+      if(isCustomRequest && !cart.length){
+        if(subjectEl) subjectEl.value = `[Custom Procurement] ${company || 'New request'}`;
+        if(submissionTypeEl) submissionTypeEl.value = 'Custom procurement request';
+      }else if(uniqueBundles.length === 1){
+        if(subjectEl) subjectEl.value = `[Procurement] ${firstBundle}`;
+        if(submissionTypeEl) submissionTypeEl.value = 'Bundle quote request';
+      }else{
+        if(subjectEl) subjectEl.value = `[Procurement] Multiple bundle quote request`;
+        if(submissionTypeEl) submissionTypeEl.value = 'Multiple bundle quote request';
+      }
+
+      const u = (window.CCMAuth && CCMAuth.getUser && CCMAuth.getUser()) || {};
+      document.getElementById('user_profile_json').value = JSON.stringify(u || {});
+    });
+
+    // Init
+    enforceLogin();
+    renderCart();
+    syncCartBadges();
+    (function(){
+      const params = new URLSearchParams(window.location.search);
+      if(params.has('custom')){
+        const custom = document.getElementById('custom_requirements');
+        if(custom){
+          custom.focus({ preventScroll: true });
+          custom.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+    })();
+
+    // Particles (same as HOME/BUNDLE)
+    (function(){
+      const c = document.getElementById('bgParticles');
+      if(!c) return;
+      const ctx = c.getContext('2d');
+      let w, h, dpr = window.devicePixelRatio || 1;
+
+      function resize(){
+        const bw = window.innerWidth, bh = window.innerHeight;
+        c.style.width = bw+'px'; c.style.height = bh+'px';
+        c.width = Math.floor(bw*dpr); c.height = Math.floor(bh*dpr);
+        ctx.setTransform(dpr,0,0,dpr,0,0);
+        w=bw; h=bh;
+      }
+      resize(); window.addEventListener('resize', resize);
+
+      const COUNT = 46;
+      const parts = Array.from({length:COUNT}).map(() => ({
+        x: Math.random()*w, y: Math.random()*h,
+        r: 1.2 + Math.random()*2.4,
+        vx: -0.22 + Math.random()*0.44,
+        vy: -0.22 + Math.random()*0.44,
+        o: 0.22 + Math.random()*0.42
+      }));
+
+      function tick(){
+        ctx.clearRect(0,0,w,h);
+        for(const p of parts){
+          p.x += p.vx; p.y += p.vy;
+          if(p.x < -20) p.x = w+10;
+          if(p.x > w+20) p.x = -10;
+          if(p.y < -20) p.y = h+10;
+          if(p.y > h+20) p.y = -10;
+
+          const grad = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*4);
+          grad.addColorStop(0, `rgba(0,198,255,${p.o+0.15})`);
+          grad.addColorStop(0.8, `rgba(255,210,63,0)`);
+          ctx.fillStyle = grad;
+          ctx.beginPath();
+          ctx.arc(p.x,p.y,p.r*4,0,Math.PI*2);
+          ctx.fill();
+        }
+        requestAnimationFrame(tick);
+      }
+      tick();
+    })();
+  </script>
+</body>
+</html>
